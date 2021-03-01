@@ -4,6 +4,8 @@ WORKDIR /pspservice/src
 
 COPY . .
 
+RUN go mod download
+RUN go mod verify
 RUN go build -o pspservice .
 
 

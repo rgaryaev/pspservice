@@ -12,29 +12,15 @@ import (
 
 func main() {
 
-	//  Add flags
-	//  -e Storage Engine:   memory or pilosa
-	//  -p Lsnr port for http listenig
-	//  -c  config fullpath (with name)
-	// package viper for configuration files  or encoding/json
-
-	//var fileName string
-	/*
-		if len(os.Args) != 2 {
-			fmt.Println("It is need to specifile a file with passport list!")
-			return
-		}
-	*/
-
 	var cfg *config.Configuration
 
+	printMemStats()
 	//configData
 	cfg, err := config.LoadConfiguration()
 	if err != nil {
 		panic("Config file is not loaded! " + err.Error())
 	}
 
-	printMemStats()
 	var storage *memstorage.MemStorage
 	storage = new(memstorage.MemStorage)
 
@@ -43,9 +29,7 @@ func main() {
 	if err != nil {
 		panic("Passport storage is not initialized : " + err.Error())
 	}
-
 	runtime.GC()
-
 	printMemStats()
 
 	log.Println("Starting storage update scheduler ...")
@@ -56,8 +40,6 @@ func main() {
 		}
 	}()
 	log.Println("storage updater has been started")
-
-	printMemStats()
 	//
 	log.Println("Starting http listener...")
 	go func() {
@@ -67,6 +49,7 @@ func main() {
 		}
 	}()
 	log.Println("Http listener has been started")
+
 	//
 	select {}
 

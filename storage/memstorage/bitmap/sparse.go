@@ -14,7 +14,7 @@ type SparseBitmap struct {
 func (sb *SparseBitmap) Init() error {
 	// PassportSeries is rows in the matrix
 
-	sb.passportData = make([][]bitMap, passportSeries)
+	sb.passportData = (make([][]bitMap, passportSeries))
 
 	//  Pasport bumber will be stored in the spare bitmap (no roaring, no RLE)
 	for i := range sb.passportData {

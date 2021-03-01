@@ -1,7 +1,7 @@
 {
  	"storage": {
  		"passport_data": "./.data/list_of_expired_passports.csv",
- 		"engine": "sparse_bitmap",
+ 		"engine": "roaring_bitmap",
  		"number_of_tests": 1000,
  		"test_passport_data": "./.data/test_list_of_expired_passports.csv"
  	},

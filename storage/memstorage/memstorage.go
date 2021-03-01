@@ -6,6 +6,7 @@ import (
 	"io"
 	"log"
 	"os"
+	"runtime"
 	"strconv"
 	"strings"
 	"time"
@@ -250,6 +251,7 @@ func (ms *MemStorage) UpdateStorage(cfg *config.Configuration) error {
 		}
 
 		log.Println("updater is finished. passport data is up to date.")
+		runtime.GC()
 
 		if isNotExists {
 			// there is no need regular update but only download the file
