@@ -58,7 +58,7 @@ func SaveConfiguration(cfg *Configuration) error {
 		return err
 	}
 	json := json.NewEncoder(configFile)
-	json.SetIndent(" ", "\t")
+	json.SetIndent("", "\t")
 	err = json.Encode(cfg)
 	if err != nil {
 		return err

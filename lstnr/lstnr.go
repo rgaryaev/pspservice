@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"log"
 	"net/http"
 	"sync"
 
@@ -33,7 +32,7 @@ func (h *baseHandler) serveAsGET(w http.ResponseWriter, r *http.Request) {
 	switch r.URL.Path {
 	case "/":
 		fmt.Fprintf(w, "URL.Path = %q\n", r.URL.Path)
-		fmt.Fprintf(w, "Number of recieved requests = %d\n", h.requestCount)
+		fmt.Fprintf(w, "number of recieved requests = %d\n", h.requestCount)
 		return
 	case "/passport":
 		h.mu.Lock()
@@ -68,9 +67,11 @@ func (h *baseHandler) serveAsGET(w http.ResponseWriter, r *http.Request) {
 			} else {
 				passport.Status = "valid"
 			}
-			err = json.NewEncoder(w).Encode(&passport)
+			json := json.NewEncoder(w)
+			json.SetIndent("", "\t")
+			err := json.Encode(&passport)
 			if err != nil {
-				http.Error(w, "json is not encoded for response", http.StatusBadRequest)
+				http.Error(w, "json was not encoded for response", http.StatusBadRequest)
 				return
 			}
 
@@ -105,8 +106,8 @@ func (h *baseHandler) serveAsPOST(w http.ResponseWriter, r *http.Request) {
 			dec := json.NewDecoder(r.Body)
 			dec.DisallowUnknownFields()
 			jsonNotParsed := func(err error) {
-				http.Error(w, "json is not decoded", http.StatusBadRequest)
-				log.Println("json is not decoded in request" + err.Error())
+				http.Error(w, "input json was not decoded", http.StatusBadRequest)
+
 			}
 			err := dec.Decode(&passportList)
 			if err != nil {
@@ -133,7 +134,10 @@ func (h *baseHandler) serveAsPOST(w http.ResponseWriter, r *http.Request) {
 					passportList[index].Status = "valid"
 				}
 			}
-			err = json.NewEncoder(w).Encode(&passportList)
+			json := json.NewEncoder(w)
+			json.SetIndent("", "\t")
+			err = json.Encode(&passportList)
+
 			if err != nil {
 				http.Error(w, "json is not encoded in response", http.StatusBadRequest)
 				return
