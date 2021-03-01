@@ -158,10 +158,13 @@ func (ms *MemStorage) StartStorage(cfg *config.Configuration) error {
 	log.Println("activated bitmap engine:  " + engine)
 
 	total, err := ms.readPassportFile(cfg.Storage.PassportData)
-	if err != nil {
+	if os.IsNotExist(err) {
+		err = ms.UpdateStorage(cfg)
+	} else if err != nil {
 		return err
+	} else {
+		log.Println("Total records loaded: " + strconv.FormatUint(uint64(total), 10))
 	}
-	log.Println("Total records loaded: " + strconv.FormatUint(uint64(total), 10))
 
 	/*
 		total, err = ms.testPassportFile(cfg.Storage.PassportData)
@@ -171,12 +174,7 @@ func (ms *MemStorage) StartStorage(cfg *config.Configuration) error {
 		log.Println("Total errors: " + strconv.FormatUint(uint64(total), 10))
 	*/
 	// if error by reason of file absence then try to load(download) file directly
-	if os.IsNotExist(err) {
-		err = ms.UpdateStorage(cfg)
-	}
-	if err != nil {
-		return err
-	}
+
 	return nil
 }
 
