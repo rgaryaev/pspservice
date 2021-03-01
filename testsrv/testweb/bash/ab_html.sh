@@ -1,2 +1,1 @@
-#!/bin/bash
-ab -p post_loc.txt -T application/json
+ab -n 1000 -c 100  "http://localhost:8080/passport?series=8003&number=011384"

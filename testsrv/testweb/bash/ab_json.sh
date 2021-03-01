@@ -1,2 +1,1 @@
-#!/bin/bash
-ab -p post_loc.txt -T application/json
+ab -n 1000 -c 100 -p input.json -T application/json "http://localhost:8080/passport"
