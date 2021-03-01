@@ -1,0 +1,18 @@
+{
+ 	"storage": {
+ 		"passport_data": "./.data/list_of_expired_passports.csv",
+ 		"engine": "sparse_bitmap",
+ 		"number_of_tests": 1000,
+ 		"test_passport_data": "./.data/test_list_of_expired_passports.csv"
+ 	},
+ 	"listener": {
+ 		"address": "0.0.0.0",
+ 		"port": "8080",
+ 		"max_passport_per_request": 100
+ 	},
+ 	"loader": {
+ 		"source_url": "http://guvm.mvd.ru/upload/expired-passports/list_of_expired_passports.csv.bz2",
+ 		"every_x_day": 1,
+ 		"last_update": "2021-03-01"
+ 	}
+ }

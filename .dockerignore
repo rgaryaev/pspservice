@@ -1,0 +1,14 @@
+**/*.log
+**/*.md
+**/*.exe
+**/._*
+**/.dockerignore
+**/.git/
+**/.gitattributes
+**/.gitignore
+**/.gitmodules
+**/.idea/
+**/docker-compose.yml
+docker
+.data
+
