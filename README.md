@@ -20,8 +20,8 @@ docker build . -t pspservice
 docker run -d -p 8080:8080 pspservice
 ```
 
-### Usage from cli
-You have to have Golang development evironment  
+### Usage from CLI
+You have to have installed Golang development evironment  
 
 ```shell
 git clone https://github.com/rgaryaev/pspservice.git
@@ -40,7 +40,7 @@ You can see examples (scripts) in the testsrc/testweb
 
 ##  Params in configuration file (config.json)
 default config has the following parameters
-
+{
  	"storage": {
  		"passport_data": "./.data/list_of_expired_passports.csv",
  		"engine": "roaring_bitmap"
@@ -55,7 +55,7 @@ default config has the following parameters
  		"every_x_day": 1,
  		"last_update": "2021-03-01"
  	}
-
+}
 "passport_data" - path to file with passport data. When service is starting first time this file doesn't extst usually and will be downloaded automatically.
 
 "engine" - this parameter defines storage engine. Possible values are:  "roaring_bitmap"  or "sparse_bitmap".  
