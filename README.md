@@ -39,7 +39,8 @@ You can see examples (scripts) in the testsrc/testweb
 'bash' folders contains scripts for curl and ab (ApacheBench ) with examples how to use and make a bechmark, accordingly 
 
 ##  Params in configuration file (config.json)
-default config has the following parameters
+Default config has the following parameters
+```
 {
  	"storage": {
  		"passport_data": "./.data/list_of_expired_passports.csv",
@@ -56,6 +57,7 @@ default config has the following parameters
  		"last_update": "2021-03-01"
  	}
 }
+```
 - "passport_data" - path to file with passport data. When service is starting first time this file doesn't extst usually and will be downloaded automatically.
 
 - "engine" - this parameter defines storage engine. Possible values are:  "roaring_bitmap"  or "sparse_bitmap".  
