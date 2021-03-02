@@ -5,21 +5,21 @@ Verification is provided by using the official database of expired and non-valid
 The service is developed as an academic project with purpose to learn Golang.
 
 For more information
-[http://ñåðâèñû.ãóâì.ìâä.ðô/info-service.htm?sid=2000](http://xn--b1afk4ade4e.xn--b1ab2a0a.xn--b1aew.xn--p1ai/info-service.htm?sid=2000).
+[http://Ã±Ã¥Ã°Ã¢Ã¨Ã±Ã».Ã£Ã³Ã¢Ã¬.Ã¬Ã¢Ã¤.Ã°Ã´/info-service.htm?sid=2000](http://xn--b1afk4ade4e.xn--b1ab2a0a.xn--b1aew.xn--p1ai/info-service.htm?sid=2000).
 
 
 ## License
 The MIT License (MIT). Please see [`LICENSE`](./LICENSE) for more information.
 
-## Usage in Docker
-
+### Usage in Docker
+'''shell
 git clone https://github.com/rgaryaev/pspservice.git
 cd ./pspservice
 # create Docker image
 docker build . -t pspservice
 # start Docker container
 docker run -d -p 8080:8080 pspservice
-
+```
 
 ## Usage from cli
 # you have to have Golang development evironment  
