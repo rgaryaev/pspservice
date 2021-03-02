@@ -11,7 +11,7 @@ For more information
 ## License
 The MIT License (MIT). Please see [`LICENSE`](./LICENSE) for more information.
 
-## Usage in Docker
+### Usage in Docker
 
 ```shell
 git clone https://github.com/rgaryaev/pspservice.git
@@ -20,7 +20,7 @@ docker build . -t pspservice
 docker run -d -p 8080:8080 pspservice
 ```
 
-## Usage from cli
+### Usage from cli
 You have to have Golang development evironment  
 
 ```shell
@@ -30,7 +30,7 @@ mkdir .data
 go build 
 ./pspservice
 ```
-### or on Windows you have to run
+#### or on Windows you have to run
 pspservice.exe 
 
 ## Example of using
