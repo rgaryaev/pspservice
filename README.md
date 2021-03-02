@@ -5,42 +5,40 @@ Verification is provided by using the official database of expired and non-valid
 The service is developed as an academic project with purpose to learn Golang.
 
 For more information
-[http://ñåðâèñû.ãóâì.ìâä.ðô/info-service.htm?sid=2000](http://xn--b1afk4ade4e.xn--b1ab2a0a.xn--b1aew.xn--p1ai/info-service.htm?sid=2000).
+[http://сервисы.гувм.мвд.рф/info-service.htm?sid=2000](http://xn--b1afk4ade4e.xn--b1ab2a0a.xn--b1aew.xn--p1ai/info-service.htm?sid=2000).
 
 
 ## License
 The MIT License (MIT). Please see [`LICENSE`](./LICENSE) for more information.
 
-### Usage in Docker
-'''shell
+## Usage in Docker
+
+```shell
 git clone https://github.com/rgaryaev/pspservice.git
 cd ./pspservice
-# create Docker image
 docker build . -t pspservice
-# start Docker container
 docker run -d -p 8080:8080 pspservice
 ```
 
 ## Usage from cli
-# you have to have Golang development evironment  
+You have to have Golang development evironment  
 
+```shell
 git clone https://github.com/rgaryaev/pspservice.git
 cd ./pspservice
 mkdir .data
 go build 
 ./pspservice
-
-# or on Windows you have to run
+```
+### or on Windows you have to run
 pspservice.exe 
 
-### Example of using
+## Example of using
 You can see examples (scripts) in the testsrc/testweb
 'powershell' folder contains script for Power Shell with examples how to use the service
 'bash' folders contains scripts for curl and ab (ApacheBench ) with examples how to use and make a bechmark, accordingly 
 
-
-
-###  Params in configuration file (config.json)
+##  Params in configuration file (config.json)
 default config has the following parameters
 
  	"storage": {
@@ -78,8 +76,3 @@ default config has the following parameters
                 Anyway before updating the service is checking Last Modification of file. if it was modified since last update then the service starts downloading and updating passport data. 
 
 "last_update" - last date of completed update of passport data. This parameter is overwriting by service
-
-
-
- 
-
