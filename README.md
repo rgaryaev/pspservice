@@ -59,20 +59,20 @@ default config has the following parameters
 "passport_data" - path to file with passport data. When service is starting first time this file doesn't extst usually and will be downloaded automatically.
 
 "engine" - this parameter defines storage engine. Possible values are:  "roaring_bitmap"  or "sparse_bitmap".  
-           "roaring_bitmap" is most effiecient from point of view of memory consumption . So far the current passport data requires about 42 - 44 Mb in memory. 
+           **"roaring_bitmap"** is most effiecient from point of view of memory consumption . So far the current passport data requires about 42 - 44 Mb in memory. 
            For more information about roaring bitmap you can vizit http://roaringbitmap.org/. 
-           "sparse_bitmap" is a simple bitmap where passport series are rows and passport numbers are bitmap colums. This engine requires about 1.25 Gb in memory, 
+           **"sparse_bitmap"** is a simple bitmap where passport series are rows and passport numbers are bitmap colums. This engine requires about 1.25 Gb in memory, 
            as we have 9999 rows * (999999 numbers / 64 bit) * 8 is about 1.25 Gb. This engine is expected to be faster than "roraring_bitmap" but actually there is no 
            big difference between them, so "sparse_bitmap" is not recomended to use.
 
 "address" and "port" - parameters for http listener 
 
-"max_passport_per_request" - default number of passports (series and number) in the Body of http request.  in other words it is 
+- "max_passport_per_request" - default number of passports (series and number) in the Body of http request.  in other words it is 
                              size of JSON array (see testsrv/testweb examples for jason request). 
                              The array from the request will truncated if it contains number of elements more than value of this parameter.
-"source_url"  - full url path where original passport data file is stored
+- "source_url"  - full url path where original passport data file is stored
 
-"every_x_day" - this parameter defines regularity how often to do update (if need).For instance, 1 means every day,  2 one time per 2 days and etc.  
-                Anyway before updating the service is checking Last Modification of file. if it was modified since last update then the service starts downloading and updating passport data. 
+- "every_x_day" - this parameter defines regularity how often to do update (if need).For instance, 1 means every day,  2 one time per 2 days and etc.  
+                Anyway before updating the service is checking Last Modification of file. if it was modified since last update then the service starts downloading and updating                   passport data. 
 
-"last_update" - last date of completed update of passport data. This parameter is overwriting by service
+- "last_update" - last date of completed update of passport data. This parameter is overwriting by service
