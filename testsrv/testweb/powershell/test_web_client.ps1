@@ -1,6 +1,9 @@
 
-Write-Host "----------- Test GET request -----------" 
+# request requires passport series and passport number
+# series  [0000:9999],  number [000001:999999], only digits
+# any deviation from this format is considered as non-valid passport    
 
+Write-Host "----------- Test GET request -----------" 
 
 $Url = "http://localhost:8080/passport?series=8003&number=011384"
 

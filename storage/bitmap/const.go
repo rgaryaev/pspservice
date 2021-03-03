@@ -14,10 +14,3 @@ const (
 	// BitmapLengthNumber is 15625
 	bitmapLengthNumber = passportMaxNumber / bitSize
 )
-
-// StorageEngine represents interfaces of memory storage engine
-type StorageEngine interface {
-	Init() error
-	AddPassport(series uint16, number uint32) (bool, error)
-	CheckPassport(series uint16, number uint32) (bool, error)
-}

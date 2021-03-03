@@ -167,7 +167,7 @@ func badRequestMsg(w *http.ResponseWriter, msg string) {
 }
 
 // StartListener - start http listner
-func StartListener(cfg *config.Configuration, storage storage.Storage) error {
+func StartListener(cfg *config.Configuration, storage *storage.Storage) error {
 
 	var handler *baseHandler = new(baseHandler)
 	handler.passportPerRequest = cfg.Listener.MaxPassportPerRequest
@@ -175,7 +175,7 @@ func StartListener(cfg *config.Configuration, storage storage.Storage) error {
 	if storage == nil {
 		return errors.New("http listener:  passport data storage is not initialized")
 	}
-	handler.storage = &storage
+	handler.storage = storage
 
 	m := http.NewServeMux()
 	srv := &http.Server{

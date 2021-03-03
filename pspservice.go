@@ -7,7 +7,7 @@ import (
 
 	"github.com/rgaryaev/pspservice/config"
 	"github.com/rgaryaev/pspservice/lstnr"
-	"github.com/rgaryaev/pspservice/storage/memstorage"
+	"github.com/rgaryaev/pspservice/storage"
 )
 
 func main() {
@@ -21,8 +21,7 @@ func main() {
 		panic("Config file is not loaded! " + err.Error())
 	}
 
-	var storage *memstorage.MemStorage
-	storage = new(memstorage.MemStorage)
+	var storage *storage.Storage = new(storage.Storage)
 
 	log.Println("Initialise and start passport data storage...")
 	err = (*storage).StartStorage(cfg)
