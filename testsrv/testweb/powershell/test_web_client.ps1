@@ -73,6 +73,25 @@ $passport = @{
 	number = "857728"
 }
 $cnt = $passport_list.add($passport)
+$passport = @{
+	series = "3713"
+	number = "569094"
+}
+$cnt =  $passport_list.add($passport)
+
+# valid
+$passport = @{
+	series = "2813"
+	number = "291700"
+}
+$cnt = $passport_list.add($passport)
+
+# nonvalid
+$passport = @{
+	series = "2213"
+	number = "200865"
+}
+$cnt = $passport_list.add($passport)
 
 
 

@@ -1,0 +1,46 @@
+This is ApacheBench, Version 2.3 <$Revision: 1843412 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking localhost (be patient)
+
+
+Server Software:        
+Server Hostname:        localhost
+Server Port:            8080
+
+Document Path:          /passport
+Document Length:        437 bytes
+
+Concurrency Level:      100
+Time taken for tests:   48.493 seconds
+Complete requests:      1000
+Failed requests:        999
+   (Connect: 0, Receive: 0, Length: 999, Exceptions: 0)
+Total transferred:      529392 bytes
+Total body sent:        581000
+HTML transferred:       420392 bytes
+Requests per second:    20.62 [#/sec] (mean)
+Time per request:       4849.325 [ms] (mean)
+Time per request:       48.493 [ms] (mean, across all concurrent requests)
+Transfer rate:          10.66 [Kbytes/sec] received
+                        11.70 kb/s sent
+                        22.36 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.7      0       3
+Processing:   756 4672 1140.8   4551    8202
+Waiting:      753 4672 1140.8   4551    8202
+Total:        756 4673 1140.7   4553    8202
+
+Percentage of the requests served within a certain time (ms)
+  50%   4553
+  66%   5096
+  75%   5332
+  80%   5526
+  90%   6244
+  95%   7090
+  98%   7318
+  99%   7433
+ 100%   8202 (longest request)

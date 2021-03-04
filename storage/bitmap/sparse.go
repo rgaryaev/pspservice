@@ -1,5 +1,7 @@
 package bitmap
 
+import "errors"
+
 // BitMap defines size of bitmap window
 type bitMap uint64
 
@@ -16,16 +18,16 @@ func (sb *SparseBitmap) Init() error {
 
 	sb.passportData = (make([][]bitMap, passportSeries))
 
-	//  Pasport bumber will be stored in the spare bitmap (no roaring, no RLE)
-	for i := range sb.passportData {
-		sb.passportData[i] = make([]bitMap, bitmapLengthNumber)
-	}
 	return nil
 }
 
 // AddPassport adds passport to storage
 func (sb *SparseBitmap) AddPassport(series uint16, number uint32) (bool, error) {
 
+	// create bitmap if it was not created before
+	if sb.passportData[series] == nil {
+		sb.passportData[series] = make([]bitMap, bitmapLengthNumber)
+	}
 	col := (number - 1) / bitSize
 	colBitPosition := bitMap(firstBit >> ((number - 1) % bitSize))
 
@@ -45,4 +47,9 @@ func (sb *SparseBitmap) CheckPassport(series uint16, number uint32) (bool, error
 
 	// Set required bit to 1
 	return (sb.passportData[series][column] & columnBitPosition) != 0, nil
+}
+
+// ImportData return error because there is no standart import
+func (sb *SparseBitmap) ImportData(fileName string) error {
+	return errors.New("import not exists")
 }

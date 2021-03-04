@@ -15,10 +15,8 @@ const configFileName string = "config.json"
 // Configuration structure of the config file
 type Configuration struct {
 	Storage struct {
-		PassportData     string `json:"passport_data"`
-		Engine           string `json:"engine"`
-		NumberOfTests    int    `json:"number_of_tests"`
-		TestPassportData string `json:"test_passport_data"`
+		PassportData string `json:"passport_data"`
+		Engine       string `json:"engine"`
 	} `json:"storage"`
 	Listener struct {
 		Address               string `json:"address"`

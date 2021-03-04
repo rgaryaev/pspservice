@@ -1,10 +1,13 @@
 package pilosadb
 
 import (
+	"bytes"
+	"io/ioutil"
 	"log"
 	"sort"
 
 	"github.com/pilosa/go-pilosa"
+	"github.com/pilosa/go-pilosa/csv"
 )
 
 // PilosaDB as a storage engine
@@ -52,7 +55,7 @@ func (pdb *PilosaDB) AddPassport(series uint16, number uint32) (bool, error) {
 	_, err := pdb.client.Query(pdb.seriesField.Set(int(series), int(number)))
 
 	if err != nil {
-		log.Fatal(err)
+		log.Println("error: inset into pilosa db:  " + err.Error())
 	}
 
 	return true, nil
@@ -62,17 +65,52 @@ func (pdb *PilosaDB) AddPassport(series uint16, number uint32) (bool, error) {
 // CheckPassport is pasport in the Pilosa
 func (pdb *PilosaDB) CheckPassport(series uint16, number uint32) (bool, error) {
 
-	response, err := pdb.client.Query(pdb.seriesField.RowsColumn(997710))
+	response, err := pdb.client.Query(pdb.seriesField.RowsColumn(number))
 	if err != nil {
 		return false, err
 	}
 	seriesRows := response.Result().RowIdentifiers().IDs
-	// we are relying  on the fact that Pilosa returns sorted slices
+
+	// we will rely on the fact that pilosa returns sorted slices
 	// so we can use go's sort.Search function
 	res := searchUints64(seriesRows, uint64(series))
-
 	if res < len(seriesRows) {
 		return seriesRows[res] == uint64(series), nil
 	}
+	/*
+		// make search via service row with number 10000
+		var serviceRow int = 10000
+		var err error
+		//	_, err := pdb.client.Query(pdb.seriesField.Set(serviceRow, int(number)))
+		_, err = pdb.client.Query(pdb.seriesField.ClearRow(serviceRow))
+		_, err = pdb.client.Query(pdb.seriesField.Set(serviceRow, int(number)))
+		response, err := pdb.client.Query(pdb.myIndex.Intersect(pdb.seriesField.Row(int(series)), pdb.seriesField.Row(serviceRow)))
+		if err != nil {
+			return false, err
+		}
+		//log.Println(response.Result().Row().Columns)
+
+		if len(response.Result().Row().Columns) > 0 && response.Result().Row().Columns[0] == uint64(number) {
+			return true, nil
+		}
+	*/
 	return false, nil
+}
+
+// ImportData import data using standard import
+func (pdb *PilosaDB) ImportData(fileName string) error {
+	file, err := ioutil.ReadFile(fileName)
+	if err != nil {
+		log.Println("pilosa import file is not opened")
+		return err
+	}
+	log.Println("pilosa started import...")
+	iterator := csv.NewColumnIterator(csv.RowIDColumnID, bytes.NewReader(file))
+	err = pdb.client.ImportField(pdb.seriesField, iterator)
+	if err != nil {
+		log.Println("error during pilosa import: " + err.Error())
+		return err
+	}
+	log.Println("pilosa finished import...")
+	return nil
 }

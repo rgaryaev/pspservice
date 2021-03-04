@@ -73,7 +73,14 @@ func main() {
 			log.Fatalln("Unable to read the file with passport list", err)
 			return
 		}
-		// copy original data, no any validation
+
+		//  validate all data
+		if _, _, ok := parseSeriesAndNumber(record[0], record[1]); !ok {
+		// next if data is not valid
+			continue 
+
+		}
+
 		// in random mode we check that index are exists
 
 		addRec := func(step uint32) {
@@ -123,5 +130,29 @@ func main() {
 		log.Fatal(err)
 	}
 	fmt.Println("")
-
 }
+
+// common checks and parsing series and number
+func parseSeriesAndNumber(series string, number string) (uint16, uint32, bool) {
+
+	//  if serias not in  [0:9999] or numbers not in [1:999999]
+	if !(len(series) == 4 && len(number) == 6) {
+		return 0, 0, false
+	}
+	// if series or number are not digits
+	ser, err := strconv.ParseUint(series, 10, 16)
+	if err != nil {
+		return 0, 0, false
+	}
+	num, err := strconv.ParseUint(number, 10, 32)
+	if err != nil {
+		return 0, 0, false
+	}
+
+	if !(ser >= 0 && ser <= 9999) || !(num >= 1 && num <= 999999) {
+		return 0, 0, false
+	}
+	return uint16(ser), uint32(num), true
+}
+
+

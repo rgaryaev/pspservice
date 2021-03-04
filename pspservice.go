@@ -23,7 +23,7 @@ func main() {
 
 	var storage *storage.Storage = new(storage.Storage)
 
-	log.Println("Initialise and start passport data storage...")
+	log.Println("Initialize and start passport data storage...")
 	err = (*storage).StartStorage(cfg)
 	if err != nil {
 		panic("Passport storage is not initialized : " + err.Error())

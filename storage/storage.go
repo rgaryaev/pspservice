@@ -60,6 +60,13 @@ func (ms *Storage) parseSeriesAndNumber(series string, number string) (uint16, u
 
 func (ms *Storage) readPassportFile(fileName string) (uint32, error) {
 
+	err := ms.engine.ImportData(fileName)
+	// nor errors means that data was successfully imported
+	if err == nil {
+		return 0, nil
+	}
+	// continue to standart reading if no import
+
 	file, err := ms.openPassportFile(fileName)
 	if err != nil {
 		return 0, err
@@ -86,6 +93,7 @@ func (ms *Storage) readPassportFile(fileName string) (uint32, error) {
 		}
 
 	}
+
 	log.Println("passport data has been loaded")
 	return total, nil
 }
@@ -94,8 +102,8 @@ func (ms *Storage) readPassportFile(fileName string) (uint32, error) {
 // for now this method is unused
 func (ms *Storage) testPassportFile(fileName string) (uint32, error) {
 	var (
-		recCount uint32 = 0
-		err      error
+		total uint32 = 0
+		err   error
 	)
 
 	file, err := ms.openPassportFile(fileName)
@@ -118,15 +126,14 @@ func (ms *Storage) testPassportFile(fileName string) (uint32, error) {
 		if series, number, ok := ms.parseSeriesAndNumber(record[0], record[1]); ok {
 
 			if exists, _ := ms.engine.CheckPassport(uint16(series), uint32(number)); !exists {
-				recCount++
-				//log.Println("Found -  " + record[0] + " : " + record[1])
+				total++
 			}
 
 		}
 
 	}
 	file.Close()
-	return recCount, nil
+	return total, nil
 }
 
 func (ms *Storage) setEngine(engine Engine) {
@@ -174,25 +181,22 @@ func (ms *Storage) StartStorage(cfg *config.Configuration) error {
 		log.Println("Total records loaded: " + strconv.FormatUint(uint64(total), 10))
 	}
 
-	/*
-		total, err = ms.testPassportFile(cfg.Storage.PassportData)
-		if err != nil {
-			return err
-		}
-		log.Println("Total errors: " + strconv.FormatUint(uint64(total), 10))
-	*/
-	// if error by reason of file absence then try to load(download) file directly
+	total, err = ms.testPassportFile(cfg.Storage.PassportData)
+	if err != nil {
+		return err
+	}
+	log.Println("Total errors: " + strconv.FormatUint(uint64(total), 10))
 
 	return nil
 }
 
-// CheckStorage - self test memory storage. Usually after updating
-// return true if everythig is correct
+// CheckStorage - self test memory storage. Usually after update procedure
+// the function returns true if everythig is correct
 func (ms *Storage) CheckStorage(cfg *config.Configuration) (bool, error) {
 	//testFileName := config[testFileName]
 	var countTestError uint32
 	var err error
-	fileName := cfg.Storage.TestPassportData
+	fileName := cfg.Storage.PassportData
 	countTestError, err = ms.testPassportFile(fileName)
 	if err != nil {
 		return false, err
