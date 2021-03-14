@@ -180,13 +180,14 @@ func (ms *Storage) StartStorage(cfg *config.Configuration) error {
 	} else {
 		log.Println("Total records loaded: " + strconv.FormatUint(uint64(total), 10))
 	}
-
-	total, err = ms.testPassportFile(cfg.Storage.PassportData)
-	if err != nil {
-		return err
-	}
-	log.Println("Total errors: " + strconv.FormatUint(uint64(total), 10))
-
+	// Testing
+	/*
+		total, err = ms.testPassportFile(cfg.Storage.PassportData)
+		if err != nil {
+			return err
+		}
+		log.Println("Total errors: " + strconv.FormatUint(uint64(total), 10))
+	*/
 	return nil
 }
 

@@ -4,8 +4,10 @@
 *.dll
 *.so
 *.dylib
+./pspservice
 .vscode/
 .data/
+.results/
 _*.json
 # Test binary, built with `go test -c`
 *.test

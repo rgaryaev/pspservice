@@ -29,8 +29,7 @@ func (pdb *PilosaDB) Init() error {
 	// Retrieve the schema
 	schema, err := pdb.client.Schema()
 	if err != nil {
-		log.Println("pilosa schema was not created: " + err.Error())
-		return err
+		log.Panic("pilosa schema was not created: " + err.Error())
 	}
 	// Create an Index object
 	pdb.myIndex = schema.Index(indexName)
@@ -39,8 +38,7 @@ func (pdb *PilosaDB) Init() error {
 
 	err = pdb.client.SyncSchema(schema)
 	if err != nil {
-		log.Println("Pilisa schema was not synchronized: " + err.Error())
-		return err
+		log.Panic("Pilisa schema was not synchronized: " + err.Error())
 	}
 	return nil
 }

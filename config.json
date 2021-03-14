@@ -1,7 +1,7 @@
 {
 	"storage": {
 		"passport_data": "./.data/list_of_expired_passports.csv",
-		"engine": "roaring_bitmap"
+		"engine": "pilosa"
 	},
 	"listener": {
 		"address": "0.0.0.0",
@@ -11,6 +11,6 @@
 	"loader": {
 		"source_url": "http://guvm.mvd.ru/upload/expired-passports/list_of_expired_passports.csv.bz2",
 		"every_x_day": 1,
-		"last_update": "2021-03-04"
+		"last_update": "2021-03-15"
 	}
 }
