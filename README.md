@@ -60,7 +60,7 @@ Default config has the following parameters
 ```
 - "passport_data" - path to file with passport data. When service is starting first time this file doesn't extst usually and will be downloaded automatically.
 
-- "engine" - this parameter defines storage engine. Possible values are:  "roaring_bitmap"  or "sparse_bitmap".  
+- "engine" - this parameter defines storage engine. Possible values are:  "roaring_bitmap", "sparse_bitmap" or "pilosa".  
   - **"roaring_bitmap"** option uses compressed bitmap and is most effiecient from point of view of memory consumption.
            So far the current passport data requires about 42 - 44 Mb in memory. 
            For more information about roaring bitmap you can vizit http://roaringbitmap.org/. 
