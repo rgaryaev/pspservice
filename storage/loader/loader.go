@@ -93,6 +93,12 @@ func LoadPassportData(cfg *config.Configuration) (bool, error) {
 
 	if os.IsNotExist(err) {
 		isNotExists = true
+		// create directory if need
+		wd := "./.data/"
+		if _, err := os.Stat(wd); os.IsNotExist(err) {
+			log.Println("work dir is created")
+			os.Mkdir(wd, os.ModeDir)
+		}
 	} else if err != nil {
 		// other sort of error
 		return false, errors.New("cannot check existance of the passport data file")
