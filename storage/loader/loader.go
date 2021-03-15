@@ -8,8 +8,9 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"github.com/rgaryaev/pspservice/config"
 	"time"
+
+	"github.com/rgaryaev/pspservice/config"
 )
 
 func doRequest(method string, url string) (*http.Response, error) {
@@ -121,8 +122,8 @@ func LoadPassportData(cfg *config.Configuration) (bool, error) {
 		if !isNotExists {
 
 			if nextUpdate.After(time.Now()) {
-				// every 60 sec
-				time.Sleep(60 * time.Second)
+				// every 120 min
+				time.Sleep(120 * time.Minute)
 				continue
 			}
 
