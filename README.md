@@ -60,14 +60,13 @@ Default config has the following parameters
 ```
 - "passport_data" - path to file with passport data. When service is starting first time this file doesn't extst usually and will be downloaded automatically.
 
-- "engine" - this parameter defines storage engine. Possible values are:  "roaring_bitmap"  or "sparse_bitmap".  
-           **"roaring_bitmap"** option uses compressed bitmap and is most effiecient from point of view of memory consumption.
+- "engine" - this parameter defines storage engine. Possible values are:  "roaring_bitmap", "sparse_bitmap" or "pilosa".  
+  - **"roaring_bitmap"** option uses compressed bitmap and is most effiecient from point of view of memory consumption.
            So far the current passport data requires about 42 - 44 Mb in memory. 
            For more information about roaring bitmap you can vizit http://roaringbitmap.org/. 
-           **"sparse_bitmap"** is a simple bitmap where passport series are rows and passport numbers are bitmap colums. In worse case this engine requires about 1.25 Gb 
-		   in memory,  as we have 9999 rows * (999999 numbers / 64 bit) * 8 is about 1.25 Gb. This engine is expected to be faster than "roraring_bitmap" but actually there is no 
-           big difference between them, so "sparse_bitmap" is not recomended to use.
-           **"pilosa"**  all required funcionality for data storage is provided by Pilosa system(https://www.pilosa.com/). Pilosa is not composed in the Docker container so 
+  - **"sparse_bitmap"** is a simple bitmap where passport series are rows and passport numbers are bitmap colums. In worse case this engine requires about 1.25 Gb 
+           in memory,  as we have 9999 rows * (999999 numbers / 64 bit) * 8 is about 1.25 Gb. This engine is expected to be faster than "roraring_bitmap" but actually there is              no big difference between them, so "sparse_bitmap" is not recomended to use.
+  - **"pilosa"**  all required funcionality for data storage is provided by Pilosa system(https://www.pilosa.com/). Pilosa is not composed in the Docker container so 
            before using this option an exisitng Pilosa's instance should exists. But due to some problems with Pilosa import functionality this option is not recomended too.
 
 - "address" and "port" - parameters for http listener 
