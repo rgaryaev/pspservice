@@ -1,6 +1,8 @@
 package bitmap
 
-import "errors"
+import (
+	"errors"
+)
 
 // BitMap defines size of bitmap window
 type bitMap uint64
@@ -45,8 +47,8 @@ func (sb *SparseBitmap) CheckPassport(series uint16, number uint32) (bool, error
 	column := (number - 1) / bitSize
 	columnBitPosition := bitMap(firstBit >> ((number - 1) % bitSize))
 
-	// Set required bit to 1
-	return (sb.passportData[series][column] & columnBitPosition) != 0, nil
+	// check asked number as Set required bit to 1  with precondition that full series is not absent in the list
+	return ((sb.passportData[series] != nil) && (sb.passportData[series][column]&columnBitPosition) != 0), nil
 }
 
 // ImportData return error because there is no standart import

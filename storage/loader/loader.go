@@ -149,7 +149,7 @@ func LoadPassportData(cfg *config.Configuration) (bool, error) {
 			log.Println("new version of the passport data is found")
 		}
 
-		log.Println("file dowloading is started...")
+		log.Println("file dowloading is started... It can take a significant time due to the file size(>500Mb)...")
 		err = downloadFile(cfg.Storage.PassportData, cfg.Loader.SourceURL)
 		if err != nil {
 			log.Println("passport data source url is unreachable. error :" + err.Error())

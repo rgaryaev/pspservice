@@ -36,7 +36,8 @@ func (sb *RoarBitmap) AddPassport(series uint16, number uint32) (bool, error) {
 // if exists then true will be returned
 func (sb *RoarBitmap) CheckPassport(series uint16, number uint32) (bool, error) {
 
-	return sb.passportData[series].Contains(number), nil
+	// check asked number as Set required bit to 1  with precondition that full series is not absent in the list
+	return (sb.passportData[series] != nil) && sb.passportData[series].Contains(number), nil
 }
 
 // ImportData return error because there is no standart import
