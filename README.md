@@ -52,9 +52,9 @@ Default config has the following parameters
  		"max_passport_per_request": 100
  	},
  	"loader": {
- 		"source_url": "http://guvm.mvd.ru/upload/expired-passports/list_of_expired_passports.csv.bz2",
+ 		"source_url": "https://проверки.гувм.мвд.рф/upload/expired-passports/list_of_expired_passports.csv.bz2",
  		"every_x_day": 1,
- 		"last_update": "2021-03-01"
+ 		"last_update": "2022-02-20"
  	}
 }
 ```
